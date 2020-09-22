@@ -6,7 +6,7 @@
         "host":"localhost",
         "user":"reseadmin",
         "password":"adm1N0N1!",
-        "port":3306"",
+        "port":"3306",
         "db":"re"
 
     }
