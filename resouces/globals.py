@@ -1,2 +1,0 @@
-global debug
-debug = True
