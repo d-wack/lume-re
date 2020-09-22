@@ -8,11 +8,11 @@ from controllers.dbcontroller import DBController
 
 def main():
     db_info = {
-        "host":"localhost",
-        "user":"dotwack",
-        "password":"redtango1",
-        "port":"3306",
-        "db":"re"
+        "host":"",
+        "user":"",
+        "password":"",
+        "port":"",
+        "db":""
     }
     db_controller = DBController(db_info=db_info)
     #getDevicesByGroup(db_controller=db_controller,lm_group_id='1358')
