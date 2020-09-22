@@ -1,14 +1,15 @@
 from models.Model_Base import Base
 from sqlalchemy import Column, Integer, String, DATETIME, func
+from resouces.globals import *
 
 class Log(Base):
     __tablename__ = 'logs'
 
     seq_id = Column(Integer, primary_key=True, autoincrement=True)
     log_name = Column(String(50))
-    log_type = Column(String(15))
-    log_code = Column(String(15))
-    log_desc = Column(String(50))
+    log_type = Column(String(50))
+    log_code = Column(String(50))
+    log_desc = Column(String(200))
     created_on = Column(DATETIME(timezone=True), server_default=func.now())
 
     def __repr__(self):

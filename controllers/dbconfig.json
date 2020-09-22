@@ -1,0 +1,10 @@
+{
+  "MySQL":{
+        "host":"localhost",
+        "user":"dotwack",
+        "password":"redtango1",
+        "port":"3306",
+        "db":"re"
+
+    }
+}
