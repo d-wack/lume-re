@@ -43,7 +43,7 @@ def lm_request_for_data(lm_resourcePath, lm_filter='', lm_fields='', lm_size='',
 
     # Print status and body of response
     # print(response.status_code)
-    print("Limit Remaining: " + str(response.headers['x-rate-limit-remaining']))
+    #print("Limit Remaining: " + str(response.headers['x-rate-limit-remaining']))
     if (int(response.headers['x-rate-limit-remaining']) == 50):
        #window = response.headers['X-Rate-Limit-Window']
        print("Going to sleep for 60 secs")

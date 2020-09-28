@@ -1,6 +1,7 @@
 import pymysql
 from sqlalchemy import MetaData, Table
 from sqlalchemy.engine import reflection
+from sqlalchemy import func
 from sqlalchemy.orm.exc import NoResultFound, StaleDataError
 from sqlalchemy.exc import IntegrityError
 from models.Log import Log
@@ -13,17 +14,22 @@ from models.DeviceDatasource import DeviceDatasource
 from models.Instance import Instance
 from models.datasources.wincpu import WinCPU
 from models.datasources.winphysicaldrive import WinPhysicalDrive
+from models.datasources.wininterface import WinInterface
+from models.datasources.winvolumeusage import WinVolumeUsage
+from models.datasources.winmemory import WinMemory
+from models.datasources.winprocess import WinProcess
+from models.datasources.vinfo import VInfo
 
 
 class DBController:
 
     def __init__(self, db_info):
 
-        self.db_host = db_info['host']
-        self.db_user = db_info['user']
-        self.db_passwd = db_info['password']
-        self.db_name = db_info['db']
-        self.db_port = db_info['port']
+        self.db_host = db_info['MySQL']['host']
+        self.db_user = db_info['MySQL']['user']
+        self.db_passwd = db_info['MySQL']['password']
+        self.db_name = db_info['MySQL']['db']
+        self.db_port = db_info['MySQL']['port']
         self.db_url = self.test_mysql_connection()
         self.db_engine = None
         self.db = None
@@ -31,6 +37,12 @@ class DBController:
         self.create_db_engine()
         self.metadata = MetaData(bind=self.db_engine)
         self.configured_datasources = Table('configured_datasources', self.metadata, autoload=True)
+        self.lastTimeWinCPU = None
+        self.lastTImeWinInterface = None
+        self.lastTimeWinMemory = None
+        self.lastTimeWinVolumeUsage = None
+        self.lastTimeWinProcess = None
+        self.lastTimeWinPhysicalDrive = None
 
     def __del__(self):
         self.session.close()
@@ -165,6 +177,30 @@ class DBController:
 
     def get_configured_ds(self):
         return self.session.query(self.configured_datasources).all()
+
+    # def set_last_captured_timestamp(self):
+    #     self.lastTimeWinCPU = Table('lastTimeStamp_43', self.metadata, autoload=True)
+    #     self.lastTImeWinInterface = Table('lastTimeStamp_44', self.metadata, autoload=True)
+    #     self.lastTimeWinMemory = Table('lastTimeStamp_47', self.metadata, autoload=True)
+    #     self.lastTimeWinVolumeUsage = Table('lastTimeStamp_111', self.metadata, autoload=True)
+    #     self.lastTimeWinProcess = Table('lastTimeStamp_138', self.metadata, autoload=True)
+    #     self.lastTimeWinPhysicalDrive = Table('lastTimeStamp_29549809', self.metadata, autoload=True)
+
+    def get_last_captured_timestamp(self, datasource_id, instance_id):
+        if datasource_id == 43:
+            return self.session.query(func.max(WinCPU.ds_timestamp)).filter(WinCPU.instance_id==instance_id).scalar()
+        elif datasource_id == 44:
+            return self.session.query(func.max(WinInterface.ds_timestamp)).filter(WinInterface.instance_id == instance_id).scalar()
+        elif datasource_id == 47:
+            return self.session.query(func.max(WinMemory.ds_timestamp)).filter(WinMemory.instance_id == instance_id).scalar()
+        elif datasource_id == 111:
+            return self.session.query(func.max(WinVolumeUsage.ds_timestamp)).filter(WinVolumeUsage.instance_id == instance_id).scalar()
+        elif datasource_id == 138:
+            return self.session.query(func.max(WinPhysicalDrive.ds_timestamp)).filter(WinPhysicalDrive.instance_id == instance_id).scalar()
+        elif datasource_id == 29549809:
+            return self.session.query(func.max(WinProcess.ds_timestamp)).filter(WinProcess.instance_id == instance_id).scalar()
+
+
 
 
 
