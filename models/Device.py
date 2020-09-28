@@ -1,6 +1,6 @@
 from models.Model_Base import Base
 from sqlalchemy import Column, Integer, String, DATETIME, func
-from resouces.globals import *
+
 
 class Device(Base):
     __tablename__ = 'devices'

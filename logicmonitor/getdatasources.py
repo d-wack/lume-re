@@ -1,5 +1,4 @@
 from logicmonitor.lm_request import lm_request
-from resouces.globals import *
 
 def getDataSources(db_controller):
     #TODO : Create Logic for Datasources - May need this in other applications

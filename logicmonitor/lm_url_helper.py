@@ -1,5 +1,3 @@
-from resouces.globals import *
-
 class LogicMonitorURIHelper:
 
     def __init__(self):

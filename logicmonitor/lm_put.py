@@ -4,7 +4,7 @@ import hashlib
 import base64
 import time
 import hmac
-from resouces.globals import *
+
 
 
 def default_config():

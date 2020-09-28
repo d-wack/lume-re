@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from calendar import timegm
 from time import strptime
 
-def get_start_date(days=2):
+def get_start_date(days=180):
     m_today = datetime.now()
     target_date = m_today - timedelta(days=days)
     return str(timegm(strptime(str(target_date), "%Y-%m-%d %H:%M:%S.%f")))

@@ -1,6 +1,6 @@
 from logicmonitor.lm_request import lm_request
 from models.DeviceDatasource import DeviceDatasource
-from resouces.globals import *
+
 
 def getDeviceDatasources(db_controller):
     print("Getting DeviceDatasources")

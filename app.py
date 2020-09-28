@@ -12,7 +12,7 @@ def main():
     print(db_info)
     db_controller = DBController(db_info=db_info)
     #print(db_controller)
-    #db_controller.set_last_captured_timestamp()
+    #db_controller.set_last_captvi app  ured_timestamp()
     #print(db_controller.get_last_captured_timestamp(datasource_id=43,instance_id=9050731))
     #getDevicesByGroup(db_controller=db_controller,lm_group_id='1358')
     #getDeviceDatasources(db_controller=db_controller)
